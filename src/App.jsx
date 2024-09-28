@@ -13,6 +13,12 @@ function App() {
     setCart(newCart);
   }
 
+  // Delete item from cart
+  const deleteItem = (id) => {
+    const newCart = cart.filter(item => item.id !== id);
+    setCart(newCart);
+  }
+
   // Add to cart or increase quantity
   const addToCart = (guitar) => {
     const item = cart.find(item => item.id === guitar.id);
@@ -28,6 +34,7 @@ function App() {
     <>
       <Header
         cart={cart}
+        deleteItem={deleteItem}
       />
 
       <main className="container-xl mt-5">

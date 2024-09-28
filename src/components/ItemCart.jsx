@@ -1,4 +1,4 @@
-const ItemCart = ({ item }) => {
+const ItemCart = ({ item, deleteItem }) => {
   return (
     <tr>
       <td>
@@ -35,6 +35,7 @@ const ItemCart = ({ item }) => {
       <td>
         <button
           type="button"
+          onClick={() => deleteItem(item.id)}
           className="btn btn-danger">
           X
         </button>
