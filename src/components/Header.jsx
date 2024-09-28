@@ -1,6 +1,6 @@
 import ItemCart from "./ItemCart"
 
-const Header = ({ cart, deleteItem, increaseQuantity, decreaseQuantity }) => {
+const Header = ({ cart, deleteItem, increaseQuantity, decreaseQuantity, clearCart }) => {
 
   const isEmpty = cart.length === 0;
 
@@ -52,7 +52,11 @@ const Header = ({ cart, deleteItem, increaseQuantity, decreaseQuantity }) => {
                         </tbody>
                       </table>
                       <p className="text-end">Total pagar: <span className="fw-bold">${totalPay}</span></p>
-                      <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+                      <button
+                        onClick={clearCart}
+                        className="btn btn-dark w-100 mt-3 p-2">
+                        Vaciar Carrito
+                      </button>
                     </>
                 }
               </div>

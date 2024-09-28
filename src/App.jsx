@@ -5,7 +5,12 @@ import Guitar from "./components/Guitar"
 import { db } from "./db/db"
 
 function App() {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('guitarLA')) || []);
+
+  // Save cart in local storage
+  useEffect(() => {
+    localStorage.setItem('guitarLA', JSON.stringify(cart));
+  }, [cart]);
 
   // Increase the number of items in the cart, the maximum quantity is 5
   const increaseQuantity = (id) => {
@@ -34,6 +39,11 @@ function App() {
     setCart(newCart);
   }
 
+  // Clear cart
+  const clearCart = () => {
+    setCart([]);
+  }
+
   // Add to cart or increase quantity
   const addToCart = (guitar) => {
     const item = cart.find(item => item.id === guitar.id);
@@ -52,6 +62,7 @@ function App() {
         deleteItem={deleteItem}
         increaseQuantity={increaseQuantity}
         decreaseQuantity={decreaseQuantity}
+        clearCart={clearCart}
       />
 
       <main className="container-xl mt-5">
