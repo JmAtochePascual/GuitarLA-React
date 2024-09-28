@@ -1,4 +1,4 @@
-const ItemCart = ({ item, deleteItem }) => {
+const ItemCart = ({ item, deleteItem, increaseQuantity, decreaseQuantity }) => {
   return (
     <tr>
       <td>
@@ -19,6 +19,7 @@ const ItemCart = ({ item, deleteItem }) => {
       <td className="flex align-items-start gap-4">
         <button
           type="button"
+          onClick={() => decreaseQuantity(item.id)}
           className="btn btn-dark">
           -
         </button>
@@ -27,6 +28,7 @@ const ItemCart = ({ item, deleteItem }) => {
 
         <button
           type="button"
+          onClick={() => increaseQuantity(item.id)}
           className="btn btn-dark">
           +
         </button>

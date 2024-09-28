@@ -7,9 +7,24 @@ import { db } from "./db/db"
 function App() {
   const [cart, setCart] = useState([]);
 
-  // Increase the number of items in the cart
+  // Increase the number of items in the cart, the maximum quantity is 5
   const increaseQuantity = (id) => {
+    const item = cart.find(item => item.id === id);
+    if (item.quantity === 5) return;
+
     const newCart = cart.map(item => item.id === id ? { ...item, quantity: item.quantity + 1 } : item);
+    setCart(newCart);
+  }
+
+  // Decrease the number of items in the cart, if the quantity is 1, the item is removed
+  const decreaseQuantity = (id) => {
+    const item = cart.find(item => item.id === id);
+    if (item.quantity === 1) {
+      deleteItem(id);
+      return;
+    }
+
+    const newCart = cart.map(item => item.id === id ? { ...item, quantity: item.quantity - 1 } : item);
     setCart(newCart);
   }
 
@@ -35,6 +50,8 @@ function App() {
       <Header
         cart={cart}
         deleteItem={deleteItem}
+        increaseQuantity={increaseQuantity}
+        decreaseQuantity={decreaseQuantity}
       />
 
       <main className="container-xl mt-5">

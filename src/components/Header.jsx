@@ -1,6 +1,6 @@
 import ItemCart from "./ItemCart"
 
-const Header = ({ cart, deleteItem }) => {
+const Header = ({ cart, deleteItem, increaseQuantity, decreaseQuantity }) => {
 
   const isEmpty = cart.length === 0;
 
@@ -44,6 +44,8 @@ const Header = ({ cart, deleteItem }) => {
                                 key={item.id}
                                 item={item}
                                 deleteItem={deleteItem}
+                                increaseQuantity={increaseQuantity}
+                                decreaseQuantity={decreaseQuantity}
                               />
                             )
                           }
