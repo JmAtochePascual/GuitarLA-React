@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Guitar = ({ guitar }) => {
+const Guitar = ({ guitar, addToCart }) => {
   const { id, name, price, description, image } = guitar;
 
   return (
@@ -15,6 +15,7 @@ const Guitar = ({ guitar }) => {
         <p className="fw-black text-primary fs-3">${price}</p>
         <button
           type="button"
+          onClick={() => addToCart(guitar)}
           className="btn btn-dark w-100">
           Agregar al Carrito
         </button>

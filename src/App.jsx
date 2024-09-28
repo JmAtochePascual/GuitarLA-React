@@ -1,12 +1,34 @@
+import { useEffect, useState } from "react"
+
+import Header from "./components/Header"
 import Guitar from "./components/Guitar"
 import { db } from "./db/db"
-import Header from "./components/Header"
 
 function App() {
+  const [cart, setCart] = useState([]);
+
+  // Increase the number of items in the cart
+  const increaseQuantity = (id) => {
+    const newCart = cart.map(item => item.id === id ? { ...item, quantity: item.quantity + 1 } : item);
+    setCart(newCart);
+  }
+
+  // Add to cart or increase quantity
+  const addToCart = (guitar) => {
+    const item = cart.find(item => item.id === guitar.id);
+    if (item) {
+      increaseQuantity(guitar.id);
+      return;
+    }
+
+    setCart([...cart, { ...guitar, quantity: 1 }]);
+  }
 
   return (
     <>
-      <Header />
+      <Header
+        cart={cart}
+      />
 
       <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
@@ -16,6 +38,7 @@ function App() {
               <Guitar
                 key={guitar.id}
                 guitar={guitar}
+                addToCart={addToCart}
               />
             )
           }
